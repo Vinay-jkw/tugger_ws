@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="lidar">
+
+    <xacro:macro name="lidar" params="parent xyz rpy">
+
+        <link name="lidar_link">
+            <inertial>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <mass value="0.8"/>
+                <inertia ixx="0.001" ixy="0.0" ixz="0.0"
+                         iyy="0.001" iyz="0.0"
+                         izz="0.001"/>
+            </inertial>
+            <visual>
+                <geometry>
+                    <mesh scale="0.001 0.001 0.001" filename="package://tugger_description/meshes/robosense_lidar.stl"/>
+                </geometry>
+                <material name="lidar_color">
+                    <color rgba="0.5 0 0.5 1.0"/>
+                </material> 
+            </visual>
+
+            <collision>
+                <geometry>
+                    <mesh scale="0.001 0.001 0.001" filename="package://tugger_description/meshes/robosense_lidar.stl"/>
+                </geometry>
+            </collision>
+        </link>
+
+        <joint name="lidar_joint" type="fixed">
+            <parent link="${parent}"/>
+            <child link="lidar_link"/>
+            <origin xyz="${xyz}" rpy="${rpy}"/>
+        </joint>
+
+    </xacro:macro>
+
+</robot>

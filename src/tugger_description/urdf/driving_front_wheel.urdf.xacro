@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="driving_front_wheel">
+
+    <xacro:macro name="driving_front_wheel" params="name parent xyz rpy">
+
+        <link name="${name}_link">
+            <inertial>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <mass value="4.0"/>
+                <inertia ixx="0.03" ixy="0.0" ixz="0.0"
+                         iyy="0.03" iyz="0.0"
+                         izz="0.03"/>
+            </inertial>
+            <visual>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <geometry>
+                    <mesh filename="package://tugger_description/meshes/driving_wheel.stl"/>
+                </geometry>
+                <material name="driving_wheel_color">
+                    <color rgba="0.15 0.15 0.15 1.0"/>
+                </material>                  
+            </visual>
+
+            <collision>
+                <geometry>
+                    <mesh  filename="package://tugger_description/meshes/driving_wheel.stl"/>
+                </geometry>
+            </collision>
+        </link>
+
+        <joint name="${name}_joint" type="continuous">
+            <parent link="${parent}"/>
+            <child link="${name}_link"/>
+            <origin xyz="${xyz}" rpy="${rpy}"/>
+            <axis xyz="1 0 0"/>
+        </joint>
+
+    </xacro:macro>
+
+</robot>

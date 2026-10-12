@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="driving_front_wheel">
+
+    <xacro:macro name="steering_shaft" params="parent xyz rpy">
+
+        <link name="steering_link">
+            <inertial>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <mass value="5.0"/>
+                <inertia ixx="0.05" ixy="0.0" ixz="0.0"
+                         iyy="0.05" iyz="0.0"
+                         izz="0.05"/>
+            </inertial>
+            <visual>
+                <geometry>
+                    <mesh scale="0.001 0.001 0.001" filename="package://tugger_description/meshes/steering_shaft.stl"/>
+                </geometry>
+                <material name="steering_color">
+                    <color rgba="0.15 0.15 0.15 1.0"/>
+                </material>                  
+            </visual>
+
+            <collision>
+                <geometry>
+                    <mesh scale="0.001 0.001 0.001" filename="package://tugger_description/meshes/steering_shaft.stl"/>
+                </geometry>
+            </collision>
+        </link>
+
+        <joint name="steering_joint" type="continuous">
+            <parent link="${parent}"/>
+            <child link="steering_link"/>
+            <origin xyz="${xyz}" rpy="${rpy}"/>
+            <axis xyz="0 1 0"/>
+        </joint>
+
+    </xacro:macro>
+
+</robot>

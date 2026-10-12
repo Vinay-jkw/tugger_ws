@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="baselink">
+    <xacro:macro name="base_link" params="parent xyz rpy">
+
+        <link name="base_link">
+            <inertial>
+                <origin xyz="0.0 0.998 0.629691" rpy="0 0 0"/>
+                <mass value="80.0"/>
+                <inertia ixx="12.0" ixy="0.0" ixz="0.0"
+                         iyy="15.0" iyz="0.0"
+                         izz="12.0"/>
+            </inertial>
+            <visual>
+                <origin xyz="0.0 0.998 0.629691" rpy="1.5708 0 0"/>    
+                <geometry>
+                    <mesh filename="package://tugger_description/meshes/Tugger_Body_updated.stl" scale="0.001 0.001 0.001"/>
+                </geometry>
+                
+                <material name="body_color">
+                    <color rgba="0.19 0.65 0.18 1.0"/>
+                </material>    
+            </visual>
+
+            <collision>
+                <origin xyz="0.0 0.998 0.629691" rpy="1.5708 0 0"/> 
+                <geometry>
+                    <mesh filename="package://tugger_description/meshes/Tugger_Body_updated.stl" scale="0.001 0.001 0.001"/>
+                </geometry>
+            </collision>
+        </link>
+        <joint name="base_joint" type="fixed">
+            <parent link="${parent}"/>
+            <child link="base_link"/>
+            <origin xyz="${xyz}" rpy="${rpy}"/>
+        </joint>
+    </xacro:macro>
+</robot>

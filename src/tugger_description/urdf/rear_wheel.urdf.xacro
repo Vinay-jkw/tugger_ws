@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="rear_wheel">
+
+    <xacro:macro name="rear_wheel" params="name parent xyz rpy">
+
+        <link name="${name}_link">
+            <inertial>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <mass value="3.0"/>
+                <inertia ixx="0.02" ixy="0.0" ixz="0.0"
+                         iyy="0.02" iyz="0.0"
+                         izz="0.02"/>
+            </inertial>
+            <visual>
+                <geometry>
+                    <mesh scale="0.001 0.001 0.001" filename="package://tugger_description/meshes/rear_wheel.stl"/>
+                </geometry>
+                <material name="rear_wheel_color">
+                    <color rgba="0.22 0.21 0.24 1.0"/>
+                </material> 
+            </visual>
+
+            <collision>
+                <geometry>
+                    <mesh scale="0.001 0.001 0.001" filename="package://tugger_description/meshes/rear_wheel.stl"/>
+                </geometry>
+            </collision>
+        </link>
+
+        <joint name="${name}_joint" type="continuous">
+            <parent link="${parent}"/>
+            <child link="${name}_link"/>
+            <origin xyz="${xyz}" rpy="${rpy}"/>
+            <axis xyz="0 1 0"/>
+        </joint>
+
+    </xacro:macro>
+
+</robot>

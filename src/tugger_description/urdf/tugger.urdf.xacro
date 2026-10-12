@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="tugger">
+
+    <!-- =========================
+         COMPONENT FILES
+         ========================= -->
+
+<xacro:include filename="$(find tugger_description)/urdf/baselink.urdf.xacro"/>
+<xacro:include filename="$(find tugger_description)/urdf/driving_front_wheel.urdf.xacro"/>
+<xacro:include filename="$(find tugger_description)/urdf/rear_wheel.urdf.xacro"/>
+<xacro:include filename="$(find tugger_description)/urdf/lidar.urdf.xacro"/>
+<xacro:include filename="$(find tugger_description)/urdf/steering.urdf.xacro"/>
+    <link name="base_footprint"/>
+    <!-- =========================
+         FRONT STEERING SHAFT
+         ========================= -->
+    <xacro:base_link
+        parent="base_footprint"
+        xyz="0 0 0.1"
+        rpy="0 0 0"/>
+
+    <xacro:steering_shaft
+        parent="base_link"
+        xyz="0 0.985 0.186787"
+        rpy="-1.5708 0 0"/> 
+  
+    
+    <!-- =========================
+         FRONT DRIVING WHEEL
+         ========================= -->
+
+    <xacro:driving_front_wheel
+        name="driving_front_wheel"
+        parent="steering_link"
+        xyz="0 0.170 0"
+        rpy="0 0 0"/>
+
+
+    <!-- =========================
+         REAR LEFT WHEEL
+         ========================= -->
+
+    <xacro:rear_wheel
+        name="rear_left_wheel"
+        parent="base_link"
+        xyz="-0.282 0 0.0 "
+        rpy="0 0 1.5708"/>
+
+
+    <!-- =========================
+         REAR RIGHT WHEEL
+         ========================= -->
+
+    <xacro:rear_wheel
+        name="rear_right_wheel"
+        parent="base_link"
+        xyz="0.382 0 0.0"
+        rpy="0 0 1.5708"/>
+
+
+    <!-- =========================
+         ROBOSENSE LIDAR
+         ========================= -->
+
+    <xacro:lidar
+        parent="base_link"
+        xyz="0 0.87 1.040785"
+        rpy="1.5708 0 0"/>
+
+</robot>
